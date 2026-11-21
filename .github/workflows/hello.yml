@@ -1,13 +1,21 @@
-name: My First Workflow
+name: Python Auto-Test
 
 on: [push]
 
 jobs:
-  first-job:
+  test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Say Hello
-        run: echo "My first GitHub Action is working!"
+      # 1. Yeh step aapki repository ka code Ubuntu machine par download karta hai
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
 
-      - name: Show Date
-        run: date
+      # 2. Yeh step Ubuntu par Python install/setup karta hai
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. Yeh step aapki app.py file ko run karta hai
+      - name: Run Python Script
+        run: python app.py
